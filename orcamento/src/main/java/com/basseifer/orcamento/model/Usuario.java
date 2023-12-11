@@ -1,9 +1,9 @@
 package com.basseifer.orcamento.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Usuario {
@@ -12,6 +12,17 @@ public class Usuario {
     private Long id;
     private String nome;
     private String tipoUsuario;
+
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+    private List<Orcamento> orcamento = new ArrayList<>();
+
+    public List<Orcamento> getOrcamento() {
+        return orcamento;
+    }
+
+    public void setOrcamento(List<Orcamento> orcamento) {
+        this.orcamento = orcamento;
+    }
 
     public Long getId() {
         return id;
@@ -36,4 +47,5 @@ public class Usuario {
     public void setTipoUsuario(String tipoUsuario) {
         this.tipoUsuario = tipoUsuario;
     }
+
 }

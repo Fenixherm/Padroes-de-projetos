@@ -1,9 +1,6 @@
 package com.basseifer.orcamento.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.util.Date;
 
@@ -23,7 +20,10 @@ public class Orcamento {
     private Date dataSaida;
     private String tipoProjeto;
     private String situacao;
+    @ManyToOne
+    @JoinColumn(name = "usuario_Id")
     private Usuario usuario;
+
 
     public void setId(Long id) {
         this.id = id;
@@ -121,11 +121,4 @@ public class Orcamento {
         this.situacao = situacao;
     }
 
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
-
-    public Usuario getUsuario() {
-        return usuario;
-    }
 }
