@@ -23,6 +23,13 @@ public class OrcamentoService implements IOrcamentoService{
     }
 
     @Override
+    public Orcamento findByromaneio(Integer romaneio) {
+        Orcamento orcamento = orcamentoRepository.findByromaneio(romaneio);
+        System.out.println("Romaneio: " + orcamento.getRomaneio());
+        return orcamento;
+    }
+
+    @Override
     public Orcamento buscarPorId(Long id) {
         Optional<Orcamento> orcamento = orcamentoRepository.findById(id);
 

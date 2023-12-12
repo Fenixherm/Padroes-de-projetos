@@ -17,7 +17,7 @@ public class Orcamento {
     private Double pesoDiferenca;
     private Double pesoFinal;
     private String obra;
-    private int romaneio;
+    private Integer romaneio;
     private int posicao;
     private Date dataChegada;
     private Date dataSaida;
@@ -86,11 +86,11 @@ public class Orcamento {
         this.obra = obra;
     }
 
-    public int getRomaneio() {
+    public Integer getRomaneio() {
         return romaneio;
     }
 
-    public void setRomaneio(int romaneio) {
+    public void setRomaneio(Integer romaneio) {
         this.romaneio = romaneio;
     }
 

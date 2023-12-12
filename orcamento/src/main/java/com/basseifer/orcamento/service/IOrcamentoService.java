@@ -8,6 +8,7 @@ import java.util.Date;
 
 public interface IOrcamentoService {
     Iterable<Orcamento> buscarTodos();
+    Orcamento findByromaneio(Integer romaneio);
     Orcamento buscarPorId(Long idOrcamento);
 
     void inserirOrcamento(Orcamento orcamento);

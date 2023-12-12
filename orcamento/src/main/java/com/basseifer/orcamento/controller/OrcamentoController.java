@@ -20,10 +20,16 @@ public class OrcamentoController {
     public ResponseEntity<Iterable<Orcamento>> buscarTodos(){
         return ResponseEntity.ok(orcamentoService.buscarTodos());
     }
-    @GetMapping("/{id}")
+    @GetMapping("/buscar-orcamento/{id}")
     public  ResponseEntity<Orcamento> buscarPorId(@PathVariable Long id){
         return ResponseEntity.ok(orcamentoService.buscarPorId(id));
     }
+
+    @GetMapping("/buscar-romaneio/{romaneio}")
+    public  ResponseEntity<Orcamento> buscarPorRomaneio(@PathVariable Integer romaneio){
+        return ResponseEntity.ok(orcamentoService.findByromaneio(romaneio));
+    }
+
     @PostMapping
     public ResponseEntity<Orcamento> inserir(@RequestBody Orcamento orcamento){
         orcamentoService.inserirOrcamento(orcamento);
