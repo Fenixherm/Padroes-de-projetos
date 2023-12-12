@@ -20,9 +20,16 @@ public class UsuarioController {
         return ResponseEntity.ok(usuarioService.buscarPorId(id));
     }
 
-    @PutMapping("/{id}")
+    @PostMapping
     public ResponseEntity<Usuario> inserir(@RequestBody Usuario usuario){
         usuarioService.inserirUsuario(usuario);
+        return ResponseEntity.ok(usuario);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Usuario> atualizar(@PathVariable Long id, @RequestBody Usuario usuario){
+
+        usuarioService.atualizar(id, usuario);
         return ResponseEntity.ok(usuario);
     }
 }

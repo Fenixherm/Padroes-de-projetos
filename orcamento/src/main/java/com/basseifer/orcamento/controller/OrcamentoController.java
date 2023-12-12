@@ -24,9 +24,9 @@ public class OrcamentoController {
     public  ResponseEntity<Orcamento> buscarPorId(@PathVariable Long id){
         return ResponseEntity.ok(orcamentoService.buscarPorId(id));
     }
-    @PutMapping("/{usuarioId}")
-    public ResponseEntity<Orcamento> inserir(@PathVariable Long usuarioId, @RequestBody Orcamento orcamento){
-        orcamentoService.inserirOrcamento(orcamento, usuarioId);
+    @PostMapping
+    public ResponseEntity<Orcamento> inserir(@RequestBody Orcamento orcamento){
+        orcamentoService.inserirOrcamento(orcamento);
         return ResponseEntity.ok(orcamento);
     }
 

@@ -4,6 +4,7 @@ import com.basseifer.orcamento.model.Orcamento;
 import com.basseifer.orcamento.model.OrcamentoRepository;
 import com.basseifer.orcamento.model.Usuario;
 import com.basseifer.orcamento.model.UsuarioRepository;
+import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,29 +30,30 @@ public class OrcamentoService implements IOrcamentoService{
     }
 
     @Override
-    public void inserirOrcamento(Orcamento orcamento, Long usuarioId) {
+    public void inserirOrcamento(Long id, Orcamento orcamento) {
+        Optional<Usuario> usuarioBd = usuarioRepository.findById(id);
 
-        Optional<Usuario> usuarioBd = usuarioRepository.findById(usuarioId);
-        Optional<Orcamento> orcamentoBd = orcamentoRepository.findById(orcamento.getId());
-        if(usuarioBd.isPresent()){
-            if(orcamentoBd.isPresent()){
-
-            }else {
-                orcamentoRepository.save(orcamento);
-            }
-        }else{
-            System.out.println("Usuário não existe !");
+        if (usuarioBd.isPresent()) {
+            Usuario usuarioOrcamento = usuarioBd.get();
+            orcamento.setUsuario(usuarioOrcamento);
+            orcamentoRepository.save(orcamento);
+        }else {
+            System.out.println("Usuário não fornecido ou ID invalido !");
+            return;
         }
     }
 
     @Override
-    public void atualizar(Orcamento orcamento, Long usuarioId) {
-        Optional<Usuario> usuarioBd = usuarioRepository.findById(usuarioId);
+    public void atualizar(Orcamento orcamento) {
+
         Optional<Orcamento> orcamenteBd = orcamentoRepository.findById(orcamento.getId());
-        if(usuarioBd.isPresent()){
-            if(orcamenteBd.isPresent()){
-                inserirOrcamento(orcamento, usuarioId);
-            }
+        if(orcamenteBd.isPresent()){
+            Orcamento orcamentoAtualizadp = orcamenteBd.get();
+            orcamentoAtualizadp.setNomeCliente(orcamento.getNomeCliente());
+            orcamentoAtualizadp.setObra(orcamento.getObra());
+            orcamentoAtualizadp.setSituacao(orcamento.getSituacao());
+            orcamentoAtualizadp.setPesoDiferenca(orcamento.getPesoDiferenca());
+            orcamentoRepository.save(orcamentoAtualizadp);
         }
     }
 

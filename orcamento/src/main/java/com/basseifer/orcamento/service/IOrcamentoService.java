@@ -10,9 +10,9 @@ public interface IOrcamentoService {
     Iterable<Orcamento> buscarTodos();
     Orcamento buscarPorId(Long id);
 
-    void inserirOrcamento(Orcamento orcamento, Long usuarioId);
+    void inserirOrcamento(Orcamento orcamento);
 
-    void atualizar(Orcamento orcamento, Long usuarioId);
+    void atualizar(Orcamento orcamento);
 
     void deletar(Long id);
 

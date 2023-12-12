@@ -21,12 +21,19 @@ public class Orcamento {
     private String tipoProjeto;
     private String situacao;
     @ManyToOne
-    @JoinColumn(name = "usuario_Id")
+    @JoinColumn(name = "usuario_Id", referencedColumnName = "id")
     private Usuario usuario;
-
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     public Long getId() {

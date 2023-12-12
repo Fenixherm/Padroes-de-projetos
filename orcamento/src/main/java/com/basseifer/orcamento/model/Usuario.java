@@ -9,12 +9,13 @@ import java.util.List;
 public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
     private Long id;
     private String nome;
     private String tipoUsuario;
 
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
-    private List<Orcamento> orcamento = new ArrayList<>();
+    @OneToMany(mappedBy = "usuario")
+    private List<Orcamento> orcamento;
 
     public List<Orcamento> getOrcamento() {
         return orcamento;
