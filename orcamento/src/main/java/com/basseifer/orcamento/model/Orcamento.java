@@ -1,14 +1,17 @@
 package com.basseifer.orcamento.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.Date;
 
 @Entity
+@Table(name = "orcamento")
 public class Orcamento {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Long idOrcamento;
     private String nomeCliente;
     private Double peso;
     private Double pesoDiferenca;
@@ -20,12 +23,17 @@ public class Orcamento {
     private Date dataSaida;
     private String tipoProjeto;
     private String situacao;
-    @ManyToOne
-    @JoinColumn(name = "usuario_Id", referencedColumnName = "id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "usuario_id", referencedColumnName = "id")
+    @JsonBackReference
     private Usuario usuario;
 
-    public void setId(Long id) {
-        this.id = id;
+    public Long getIdOrcamento() {
+        return idOrcamento;
+    }
+
+    public void setIdOrcamento(Long idOrcamento) {
+        this.idOrcamento = idOrcamento;
     }
 
     public Usuario getUsuario() {
@@ -36,9 +44,7 @@ public class Orcamento {
         this.usuario = usuario;
     }
 
-    public Long getId() {
-        return id;
-    }
+
 
     public String getNomeCliente() {
         return nomeCliente;

@@ -1,21 +1,24 @@
 package com.basseifer.orcamento.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Table(name = "tab_usuario")
 public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private Long id;
+    @Column(length = 50, nullable = false)
     private String nome;
-    private String tipoUsuario;
 
-    @OneToMany(mappedBy = "usuario")
-    private List<Orcamento> orcamento;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "usuario")
+    @JsonManagedReference
+    private List<Orcamento> orcamento = new ArrayList<>();
 
     public List<Orcamento> getOrcamento() {
         return orcamento;
@@ -41,12 +44,12 @@ public class Usuario {
         this.nome = nome;
     }
 
-    public String getTipoUsuario() {
-        return tipoUsuario;
+    @Override
+    public String toString() {
+        return "Usuario{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", orcamento=" + orcamento +
+                '}';
     }
-
-    public void setTipoUsuario(String tipoUsuario) {
-        this.tipoUsuario = tipoUsuario;
-    }
-
 }

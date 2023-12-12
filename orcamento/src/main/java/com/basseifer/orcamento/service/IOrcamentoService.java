@@ -8,13 +8,13 @@ import java.util.Date;
 
 public interface IOrcamentoService {
     Iterable<Orcamento> buscarTodos();
-    Orcamento buscarPorId(Long id);
+    Orcamento buscarPorId(Long idOrcamento);
 
     void inserirOrcamento(Orcamento orcamento);
 
     void atualizar(Orcamento orcamento);
 
-    void deletar(Long id);
+    void deletar(Long idOrcamento);
 
 
 }

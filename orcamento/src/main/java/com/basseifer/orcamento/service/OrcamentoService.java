@@ -30,8 +30,8 @@ public class OrcamentoService implements IOrcamentoService{
     }
 
     @Override
-    public void inserirOrcamento(Long id, Orcamento orcamento) {
-        Optional<Usuario> usuarioBd = usuarioRepository.findById(id);
+    public void inserirOrcamento(Orcamento orcamento) {
+        Optional<Usuario> usuarioBd = usuarioRepository.findById(orcamento.getUsuario().getId());
 
         if (usuarioBd.isPresent()) {
             Usuario usuarioOrcamento = usuarioBd.get();
@@ -46,7 +46,7 @@ public class OrcamentoService implements IOrcamentoService{
     @Override
     public void atualizar(Orcamento orcamento) {
 
-        Optional<Orcamento> orcamenteBd = orcamentoRepository.findById(orcamento.getId());
+        Optional<Orcamento> orcamenteBd = orcamentoRepository.findById(orcamento.getIdOrcamento());
         if(orcamenteBd.isPresent()){
             Orcamento orcamentoAtualizadp = orcamenteBd.get();
             orcamentoAtualizadp.setNomeCliente(orcamento.getNomeCliente());
