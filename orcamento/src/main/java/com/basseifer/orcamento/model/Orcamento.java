@@ -1,13 +1,13 @@
 package com.basseifer.orcamento.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.Date;
 
 @Entity
 @Table(name = "orcamento")
+
 public class Orcamento {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

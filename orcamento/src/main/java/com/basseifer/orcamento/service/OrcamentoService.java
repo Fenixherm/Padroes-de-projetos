@@ -4,10 +4,10 @@ import com.basseifer.orcamento.model.Orcamento;
 import com.basseifer.orcamento.model.OrcamentoRepository;
 import com.basseifer.orcamento.model.Usuario;
 import com.basseifer.orcamento.model.UsuarioRepository;
-import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -23,6 +23,12 @@ public class OrcamentoService implements IOrcamentoService{
     }
 
     @Override
+    public List<Orcamento> findAllBynomeCliente(String nome) {
+        return orcamentoRepository.findAllBynomeCliente(nome);
+    }
+
+
+    @Override
     public Orcamento findByromaneio(Integer romaneio) {
         Orcamento orcamento = orcamentoRepository.findByromaneio(romaneio);
         System.out.println("Romaneio: " + orcamento.getRomaneio());
@@ -32,8 +38,14 @@ public class OrcamentoService implements IOrcamentoService{
     @Override
     public Orcamento buscarPorId(Long id) {
         Optional<Orcamento> orcamento = orcamentoRepository.findById(id);
-
         return orcamento.get();
+    }
+
+
+
+    @Override
+    public long countMethod() {
+        return orcamentoRepository.count();
     }
 
     @Override
@@ -51,15 +63,16 @@ public class OrcamentoService implements IOrcamentoService{
     }
 
     @Override
-    public void atualizar(Orcamento orcamento) {
+    public void atualizar(Long id, Orcamento orcamento) {
 
-        Optional<Orcamento> orcamenteBd = orcamentoRepository.findById(orcamento.getIdOrcamento());
+        Optional<Orcamento> orcamenteBd = orcamentoRepository.findById(id);
         if(orcamenteBd.isPresent()){
             Orcamento orcamentoAtualizadp = orcamenteBd.get();
             orcamentoAtualizadp.setNomeCliente(orcamento.getNomeCliente());
             orcamentoAtualizadp.setObra(orcamento.getObra());
             orcamentoAtualizadp.setSituacao(orcamento.getSituacao());
             orcamentoAtualizadp.setPesoDiferenca(orcamento.getPesoDiferenca());
+            orcamentoAtualizadp.setPesoFinal(orcamento.getPeso() + orcamento.getPesoDiferenca());
             orcamentoRepository.save(orcamentoAtualizadp);
         }
     }
