@@ -9,6 +9,16 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 
+/**
+ * Controller de Orçamentos, possuímos endpoints
+ * de pesquisa como:
+ * <p>- por id: "buscar-orcamento/{id}"</p>
+ * <p>- por numero de romaneio: "/buscar-romaneio/{romaneio}" </p>
+ * <p>- por nome de cliente: "/buscar-cliente/{nome}"</p>
+ * <p>- entre datas:"/data-orcamento/{data1}:{data2}"</p>
+ * E também métodos post, insert e delete
+ * @author Guilherme
+ */
 @RestController
 @RequestMapping("orcamentos")
 public class OrcamentoController {
@@ -36,7 +46,7 @@ public class OrcamentoController {
         return ResponseEntity.ok(orcamentoService.countMethod());
     }
 
-    @GetMapping("/buscar-nome/{nome}")
+    @GetMapping("/buscar-cliente/{nome}")
     public ResponseEntity<Iterable<Orcamento>> findAllByName(@PathVariable String nome){
         return ResponseEntity.ok(orcamentoService.findAllBynomeCliente(nome));
     }
