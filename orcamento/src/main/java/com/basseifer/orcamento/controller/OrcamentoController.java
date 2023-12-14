@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.time.LocalDate;
 
 @RestController
 @RequestMapping("orcamentos")
@@ -37,8 +37,12 @@ public class OrcamentoController {
     }
 
     @GetMapping("/buscar-nome/{nome}")
-    public ResponseEntity<List<Orcamento>> findAllByName(@PathVariable String nome){
+    public ResponseEntity<Iterable<Orcamento>> findAllByName(@PathVariable String nome){
         return ResponseEntity.ok(orcamentoService.findAllBynomeCliente(nome));
+    }
+    @GetMapping("/data-orcamento/{data1}:{data2}")
+    public ResponseEntity<Iterable<Orcamento>> findByLocalDate(@PathVariable LocalDate data1, @PathVariable LocalDate data2){
+        return ResponseEntity.ok(orcamentoService.findByLocalDate(data1, data2));
     }
 
     @PostMapping

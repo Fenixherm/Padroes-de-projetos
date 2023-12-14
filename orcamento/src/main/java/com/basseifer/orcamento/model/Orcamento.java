@@ -3,6 +3,7 @@ package com.basseifer.orcamento.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -19,8 +20,8 @@ public class Orcamento {
     private String obra;
     private Integer romaneio;
     private int posicao;
-    private Date dataChegada;
-    private Date dataSaida;
+    private LocalDate dataChegada;
+    private LocalDate dataSaida;
     private String tipoProjeto;
     private String situacao;
     @ManyToOne(fetch = FetchType.LAZY)
@@ -102,19 +103,19 @@ public class Orcamento {
         this.posicao = posicao;
     }
 
-    public Date getDataChegada() {
+    public LocalDate getDataChegada() {
         return dataChegada;
     }
 
-    public void setDataChegada(Date dataChegada) {
+    public void setDataChegada(LocalDate dataChegada) {
         this.dataChegada = dataChegada;
     }
 
-    public Date getDataSaida() {
+    public LocalDate getDataSaida() {
         return dataSaida;
     }
 
-    public void setDataSaida(Date dataSaida) {
+    public void setDataSaida(LocalDate dataSaida) {
         this.dataSaida = dataSaida;
     }
 

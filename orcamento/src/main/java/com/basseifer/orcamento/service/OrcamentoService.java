@@ -7,7 +7,7 @@ import com.basseifer.orcamento.model.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.time.LocalDate;
 import java.util.Optional;
 
 @Service
@@ -23,7 +23,7 @@ public class OrcamentoService implements IOrcamentoService{
     }
 
     @Override
-    public List<Orcamento> findAllBynomeCliente(String nome) {
+    public Iterable<Orcamento> findAllBynomeCliente(String nome) {
         return orcamentoRepository.findAllBynomeCliente(nome);
     }
 
@@ -80,5 +80,10 @@ public class OrcamentoService implements IOrcamentoService{
     @Override
     public void deletar(Long id) {
         orcamentoRepository.delete(buscarPorId(id));
+    }
+
+    @Override
+    public Iterable<Orcamento> findByLocalDate(LocalDate data1, LocalDate data2) {
+        return orcamentoRepository.findByLocalDate(data1, data2);
     }
 }
